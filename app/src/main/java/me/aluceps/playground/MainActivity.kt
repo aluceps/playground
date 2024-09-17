@@ -23,7 +23,9 @@ class MainActivity : ComponentActivity() {
             PlaygroundTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     MainScreen(
-                        name = "Android",
+                        onClick = {
+                            PagerActivity.startActicity(this, it)
+                        },
                         modifier = Modifier.padding(innerPadding)
                     )
                 }
@@ -33,12 +35,18 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun MainScreen(name: String, modifier: Modifier = Modifier) {
+fun MainScreen(
+    onClick: (Int) -> Unit,
+    modifier: Modifier = Modifier
+) {
     LazyColumn(
         modifier = modifier
     ) {
         items(10) {
-            ListItem(name = "item no.$it")
+            ListItem(
+                name = "item no.$it",
+                onClick = { onClick(it) }
+            )
         }
     }
 }
@@ -46,11 +54,12 @@ fun MainScreen(name: String, modifier: Modifier = Modifier) {
 @Composable
 fun ListItem(
     name: String,
-    modifier: Modifier = Modifier
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
 ) {
-    Button(onClick = { /*TODO*/ }) {
+    Button(onClick = onClick) {
         Text(
-            text = "$name",
+            text = name,
             modifier = modifier
         )
     }
@@ -58,8 +67,11 @@ fun ListItem(
 
 @Preview(showBackground = true)
 @Composable
-fun ListItemPreview() {
+private fun ListItemPreview() {
     PlaygroundTheme {
-        ListItem("Android")
+        ListItem(
+            name = "Android",
+            onClick = {},
+        )
     }
 }
