@@ -36,7 +36,7 @@ class PagerActivity : ComponentActivity() {
 
     companion object {
         private const val INITIAL_PAGE = "initial_page"
-        fun startActicity(context: Context, initialPage: Int) {
+        fun startActivity(context: Context, initialPage: Int) {
             context.startActivity(
                 Intent(context, PagerActivity::class.java).apply {
                     putExtra(INITIAL_PAGE, initialPage)
