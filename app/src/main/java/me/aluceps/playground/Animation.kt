@@ -7,6 +7,9 @@ import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.Button
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Slider
+import androidx.compose.material3.SliderState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -16,8 +19,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
-import kotlin.math.roundToInt
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Preview(showBackground = true)
 @Composable
 private fun ImageContainerPreview() {
@@ -60,16 +63,14 @@ private fun ImageContainerPreview() {
 
     var enabled by remember { mutableStateOf(false) }
     val index = animateIntAsState(
-        targetValue = if (enabled) images.size - 1 else 0,
+        targetValue = if (enabled) images.size else 0,
         animationSpec = infiniteRepeatable(
+            // durationMillis: 開始から終了までの総時間
             animation = tween(
-                durationMillis = (4170 / 1.6).roundToInt(),
+                durationMillis = 42 * 34,
                 easing = LinearEasing,
             )
         ),
-        finishedListener = {
-            enabled = false
-        },
         label = "sample animation",
     )
 
@@ -80,12 +81,28 @@ private fun ImageContainerPreview() {
             painter = painterResource(id = images[index.value]),
             contentDescription = null,
         )
-        Button(onClick = {
-            enabled = true
-        }) {
+        Text(
+            text = "%02d / %d".format(
+                index.value + 1,
+                images.size,
+            )
+        )
+        Slider(
+            state = SliderState(
+                value = index.value.toFloat(),
+                valueRange = 0f..(images.size - 1).coerceAtLeast(0).toFloat()
+            ),
+            thumb = {},
+        )
+        Button(
+            onClick = {
+                enabled = true
+            },
+            enabled = enabled.not()
+        ) {
             Text(
                 text = if (enabled) {
-                    "stop"
+                    "running..."
                 } else {
                     "start"
                 }
