@@ -12,7 +12,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
@@ -20,6 +19,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import kotlinx.coroutines.launch
+import me.aluceps.playground.ui.component.CustomSnackbar
 import me.aluceps.playground.ui.theme.PlaygroundTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -41,9 +41,9 @@ class SnackBarActivity : ComponentActivity() {
                             }
                         )
                     },
-                    snackbarHost = {
-                        SnackbarHost(hostState = snackbarHostState)
-                    },
+//                    snackbarHost = {
+//                        SnackbarHost(hostState = snackbarHostState)
+//                    },
                 ) { innerPadding ->
                     Column(
                         modifier = Modifier
@@ -59,6 +59,9 @@ class SnackBarActivity : ComponentActivity() {
                         }
                     }
                 }
+                CustomSnackbar(
+                    snackbarHostState = snackbarHostState,
+                )
             }
         }
     }
