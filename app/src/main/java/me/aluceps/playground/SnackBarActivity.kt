@@ -10,16 +10,19 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import kotlinx.coroutines.launch
 import me.aluceps.playground.ui.theme.PlaygroundTheme
 
+@OptIn(ExperimentalMaterial3Api::class)
 class SnackBarActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,6 +34,13 @@ class SnackBarActivity : ComponentActivity() {
                 Scaffold(
                     modifier = Modifier
                         .fillMaxSize(),
+                    topBar = {
+                        TopAppBar(
+                            title = {
+                                Text(text = this::class.simpleName ?: "")
+                            }
+                        )
+                    },
                     snackbarHost = {
                         SnackbarHost(hostState = snackbarHostState)
                     },
