@@ -24,6 +24,7 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".ListActivity" />
         <activity android:name=".PagerActivity" />
     </application>
 </manifest>
