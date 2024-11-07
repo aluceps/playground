@@ -1,5 +1,7 @@
 package me.aluceps.playground
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -26,6 +28,15 @@ class ListActivity : ComponentActivity() {
                     )
                 }
             }
+        }
+    }
+
+    companion object {
+        fun startActivity(context: Context) {
+            context.startActivity(
+                Intent(context, ListActivity::class.java).apply {
+                }
+            )
         }
     }
 }
