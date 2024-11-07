@@ -1,4 +1,4 @@
-package me.aluceps.playground
+package me.aluceps.playground.ui.component
 
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.animateIntAsState
@@ -19,6 +19,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
+import me.aluceps.playground.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Preview(showBackground = true)
