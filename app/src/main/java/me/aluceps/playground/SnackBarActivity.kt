@@ -9,8 +9,15 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Button
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
+import androidx.compose.material3.Text
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import kotlinx.coroutines.launch
 import me.aluceps.playground.ui.theme.PlaygroundTheme
 
 class SnackBarActivity : ComponentActivity() {
@@ -19,12 +26,27 @@ class SnackBarActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             PlaygroundTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+                val scope = rememberCoroutineScope()
+                val snackbarHostState = remember { SnackbarHostState() }
+                Scaffold(
+                    modifier = Modifier
+                        .fillMaxSize(),
+                    snackbarHost = {
+                        SnackbarHost(hostState = snackbarHostState)
+                    },
+                ) { innerPadding ->
                     Column(
                         modifier = Modifier
                             .fillMaxSize()
                             .padding(innerPadding)
                     ) {
+                        Button(onClick = {
+                            scope.launch {
+                                snackbarHostState.showSnackbar("This is snackbar")
+                            }
+                        }) {
+                            Text(text = "SnackBarを表示")
+                        }
                     }
                 }
             }

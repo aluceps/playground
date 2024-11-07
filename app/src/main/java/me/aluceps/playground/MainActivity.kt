@@ -31,6 +31,13 @@ class MainActivity : ComponentActivity() {
                                 text = "ListActivityを起動"
                             )
                         }
+                        Button(onClick = {
+                            SnackBarActivity.startActivity(this@MainActivity)
+                        }) {
+                            Text(
+                                text = "SnackBarActivityを起動"
+                            )
+                        }
                     }
                 }
             }
