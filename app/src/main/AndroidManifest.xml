@@ -26,5 +26,6 @@
 
         <activity android:name=".ListActivity" />
         <activity android:name=".PagerActivity" />
+        <activity android:name=".SnackBarActivity" />
     </application>
 </manifest>
