@@ -13,6 +13,8 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHostState
+import androidx.compose.material3.SnackbarResult.ActionPerformed
+import androidx.compose.material3.SnackbarResult.Dismissed
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.remember
@@ -52,7 +54,16 @@ class SnackBarActivity : ComponentActivity() {
                     ) {
                         Button(onClick = {
                             scope.launch {
-                                snackbarHostState.showSnackbar("This is snackbar")
+                                val result = snackbarHostState
+                                    .showSnackbar(
+                                        message = "This is snackbar",
+                                    )
+                                when (result) {
+                                    ActionPerformed -> {}
+                                    Dismissed -> {
+                                        this@SnackBarActivity.finish()
+                                    }
+                                }
                             }
                         }) {
                             Text(text = "SnackBarを表示")
